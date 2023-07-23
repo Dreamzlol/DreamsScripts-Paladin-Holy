@@ -84,7 +84,8 @@ local debuffName = {
     ["Frostbolt"] = true,
     ["Frostbolt Volley"] = true,
     ["Cone of Cold"] = true,
-    ["Frost Nova"] = true
+    ["Frost Nova"] = true,
+    ["Unstable Affliction"] = true
 }
 
 Cleanse:Callback(function(spell)
