@@ -1,7 +1,7 @@
 local Unlocker, awful, rotation = ...
 local holy = rotation.paladin.holy
 local Spell = awful.Spell
-local player, target = awful.player, awful.target
+local player, target, focus = awful.player, awful.target, awful.focus
 
 awful.Populate({
     LayOnHands            = Spell(48788, { beneficial = true, IgnoreCasting = true }),
@@ -199,41 +199,33 @@ DivineShield:Callback(function(spell)
 end)
 
 BeaconOfLight:Callback(function(spell)
-    awful.fullGroup.within(40).filter(filter).loop(function(friend)
-        if not friend then
+    if not focus then
+        return
+    end
+
+    if focus.buffRemains("Beacon Of Light", player) < 5 then
+        if spell:Cast(focus) then
+            awful.alert(spell.name, spell.id)
             return
         end
-
-        if friend.name == rotation.settings.beaconOfLightUnit then
-            if friend.buffRemains("Beacon Of Light", player) < 5 then
-                if spell:Cast(friend) then
-                    awful.alert(spell.name, spell.id)
-                    return
-                end
-            end
-        end
-    end)
+    end
 end)
 
 SacredShield:Callback(function(spell)
-    awful.fullGroup.within(40).filter(filter).loop(function(friend)
-        if not friend then
+    if not focus then
+        return
+    end
+
+    if focus.buff("Sacred Shield") then
+        return
+    end
+
+    if focus.buffRemains("Sacred Shield") < 5 then
+        if spell:Cast(focus) then
+            awful.alert(spell.name, spell.id)
             return
         end
-
-        if friend.buff("Sacred Shield") then
-            return
-        end
-
-        if friend.name == rotation.settings.sacredShieldUnit then
-            if friend.buffRemains("Sacred Shield") < 5 then
-                if spell:Cast(friend) then
-                    awful.alert(spell.name, spell.id)
-                    return
-                end
-            end
-        end
-    end)
+    end
 end)
 
 DivineFavor:Callback(function(spell)

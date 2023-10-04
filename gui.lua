@@ -24,8 +24,8 @@ rotation.settings = settings
 
 local statusFrame = gui:StatusFrame({
     colors = {
-        background = {0, 0, 0, 0},
-        enabled = {30, 240, 255, 1},
+        background = { 0, 0, 0, 0 },
+        enabled = { 30, 240, 255, 1 },
     },
     maxWidth = 600,
     padding = 12,
@@ -79,12 +79,12 @@ Mode:Text({
 })
 
 Mode:Dropdown({
-	var = "mode",
-	tooltip = "Select the Rotation Mode.",
-	options = {
-		{ label = awful.textureEscape(20473, 16) .. " PvE", value = "PvE", tooltip = "Use PvE Rotation" },
-		{ label = awful.textureEscape(53551, 16) .. " PvP", value = "PvP", tooltip = "Use PvP Rotation" },
-	},
+    var = "mode",
+    tooltip = "Select the Rotation Mode.",
+    options = {
+        { label = awful.textureEscape(20473, 16) .. " PvE", value = "PvE", tooltip = "Use PvE Rotation" },
+        { label = awful.textureEscape(53551, 16) .. " PvP", value = "PvP", tooltip = "Use PvP Rotation" },
+    },
     placeholder = "None",
     header = "Select Rotation Mode",
 })
@@ -225,22 +225,18 @@ Spells:Text({
     text = awful.textureEscape(53563) .. "Beacon of Light",
 })
 
-Spells:Dropdown({
-    var = "beaconOfLightUnit",
-    tooltip = "Casting Beacon of Light on unit",
-    options = options,
-    placeholder = "Select your unit",
+Spells:Text({
+    text =
+    "For now, because a bug in the Awful Framework, just set your Unit as Focus. Dropdown is coming back when the Awful Devs fixed it.",
 })
 
 Spells:Text({
     text = awful.textureEscape(53601) .. "Sacred Shield",
 })
 
-Spells:Dropdown({
-    var = "sacredShieldUnit",
-    tooltip = "Casting Sacred Shield on unit",
-    options = options,
-    placeholder = "Select your unit",
+Spells:Text({
+    text =
+    "For now, because a bug in the Awful Framework, just set your Unit as Focus. Dropdown is coming back when the Awful Devs fixed it.",
 })
 
 local Toggles = gui:Tab(awful.textureEscape(6064, 16) .. "Toggles")

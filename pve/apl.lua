@@ -44,6 +44,7 @@ function rotation.APL_PvE()
     if not rotation.settings.useOOC then
         if not player.combat then return end
     end
+
     if player.used("Divine Sacrifice", 10) then
         awful.call("RunMacroText", "/cancelaura Divine Sacrifice")
     end
