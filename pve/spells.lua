@@ -3,6 +3,10 @@ local holy = rotation.paladin.holy
 local Spell = awful.Spell
 local player, target, focus = awful.player, awful.target, awful.focus
 
+if not rotation.settings.mode == "PvE" then
+    return
+end
+
 awful.Populate({
     LayOnHands            = Spell(48788, { beneficial = true, IgnoreCasting = true }),
     BeaconOfLight         = Spell(53563, { beneficial = true }),
