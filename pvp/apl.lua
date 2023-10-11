@@ -2,10 +2,6 @@ local Unlocker, awful, rotation = ...
 local holy = rotation.paladin.holy
 local player = awful.player
 
-if not rotation.settings.mode == "PvP" then
-    return
-end
-
 function rotation.APL_PvP()
     if awful.player.mounted then
         return

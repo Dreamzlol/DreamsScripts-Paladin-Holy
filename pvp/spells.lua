@@ -3,10 +3,6 @@ local holy = rotation.paladin.holy
 local Spell = awful.Spell
 local player, target = awful.player, awful.target
 
-if not rotation.settings.mode == "PvP" then
-    return
-end
-
 awful.Populate({
     HammerOfJustice       = Spell(5588, { cc = "stun", effect = "magic", ignoreCasting = true }),
     HandOfProtection      = Spell(10278, { ignoreCasting = true, ignoreControl = true }),

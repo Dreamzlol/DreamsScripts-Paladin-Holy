@@ -2,10 +2,6 @@ local Unlocker, awful, rotation = ...
 local holy = rotation.paladin.holy
 local player, target = awful.player, awful.target
 
-if not rotation.settings.mode == "PvE" then
-    return
-end
-
 local function engineering_gloves()
     local UseInventoryItem = awful.unlock("UseInventoryItem")
     local getItemCooldown = GetInventoryItemCooldown("player", 10)
