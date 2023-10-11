@@ -348,7 +348,7 @@ pve_holy_light:Callback("tank", function(spell)
     end
 end)
 
-HolyLight:Callback("incinerate_flesh", function(spell)
+pve_holy_light:Callback("incinerate_flesh", function(spell)
     if player.moving then
         return
     end
