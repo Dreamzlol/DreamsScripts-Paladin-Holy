@@ -8,23 +8,23 @@ if not rotation.settings.mode == "PvE" then
 end
 
 awful.Populate({
-    LayOnHands            = Spell(48788, { beneficial = true, IgnoreCasting = true }),
-    BeaconOfLight         = Spell(53563, { beneficial = true }),
-    SacredShield          = Spell(53601, { beneficial = true }),
-    HolyShock             = Spell(48825, { beneficial = true }),
-    HolyLight             = Spell(48782, { beneficial = true }),
-    HandOfSacrifice       = Spell(6940, { beneficial = true }),
-    Cleanse               = Spell(4987, { beneficial = true }),
-    DivineShield          = Spell(642, { IgnoreCasting = true }),
-    DivineFavor           = Spell(20216),
-    JudgementOfWisdom     = Spell(53408),
-    JudgementOfLight      = Spell(20271),
-    DivinePlea            = Spell(54428),
-    DivineIllumination    = Spell(31842),
-    SealOfWisdom          = Spell(20166),
-    AutoAttack            = Spell(6603),
-    AvengingWrath         = Spell(31884),
-    ShieldOfRighteousness = Spell(61411),
+    pve_lay_on_hands            = Spell(48788, { beneficial = true, IgnoreCasting = true }),
+    pve_beacon_of_light         = Spell(53563, { beneficial = true }),
+    pve_sacred_shield           = Spell(53601, { beneficial = true }),
+    pve_holy_shock              = Spell(48825, { beneficial = true }),
+    pve_holy_light              = Spell(48782, { beneficial = true }),
+    pve_hand_of_sacrifice       = Spell(6940, { beneficial = true }),
+    pve_cleanse                 = Spell(4987, { beneficial = true }),
+    pve_divine_shield           = Spell(642, { IgnoreCasting = true }),
+    pve_divine_favor            = Spell(20216),
+    pve_judgement_of_wisdom     = Spell(53408),
+    pve_judgement_of_light      = Spell(20271),
+    pve_divine_plea             = Spell(54428),
+    pve_divine_illumination     = Spell(31842),
+    pve_seal_of_wisdom          = Spell(20166),
+    pve_auto_attack             = Spell(6603),
+    pve_avenging_wrath          = Spell(31884),
+    pve_shield_of_righteousness = Spell(61411),
 }, holy, getfenv(1))
 
 local function isBoss(unit)
@@ -66,7 +66,7 @@ local function isTank(unit)
     return false
 end
 
-AutoAttack:Callback(function(spell)
+pve_auto_attack:Callback(function(spell)
     local enemy = awful.enemies.within(5).filter(filter).lowest
 
     if not enemy or not enemy.combat then
@@ -92,7 +92,7 @@ local debuffName = {
     ["Unstable Affliction"] = true
 }
 
-Cleanse:Callback(function(spell)
+pve_cleanse:Callback(function(spell)
     if not rotation.settings.usecleanse then
         return
     end
@@ -117,7 +117,7 @@ Cleanse:Callback(function(spell)
     end)
 end)
 
-ShieldOfRighteousness:Callback(function(spell)
+pve_shield_of_righteousness:Callback(function(spell)
     if not rotation.settings.useshieldofrighteousness then
         return
     end
@@ -139,7 +139,7 @@ ShieldOfRighteousness:Callback(function(spell)
     end
 end)
 
-LayOnHands:Callback(function(spell)
+pve_lay_on_hands:Callback(function(spell)
     if not rotation.settings.uselayonhands then
         return
     end
@@ -158,7 +158,7 @@ LayOnHands:Callback(function(spell)
     end
 end)
 
-HandOfSacrifice:Callback(function(spell)
+pve_hand_of_sacrifice:Callback(function(spell)
     if not rotation.settings.usehandofsacrifice then
         return
     end
@@ -180,7 +180,7 @@ HandOfSacrifice:Callback(function(spell)
     end
 end)
 
-DivineShield:Callback(function(spell)
+pve_divine_shield:Callback(function(spell)
     if not rotation.settings.usedivineshield then
         return
     end
@@ -202,7 +202,7 @@ DivineShield:Callback(function(spell)
     end
 end)
 
-BeaconOfLight:Callback(function(spell)
+pve_beacon_of_light:Callback(function(spell)
     if not focus then
         return
     end
@@ -215,7 +215,7 @@ BeaconOfLight:Callback(function(spell)
     end
 end)
 
-SacredShield:Callback(function(spell)
+pve_sacred_shield:Callback(function(spell)
     if not focus then
         return
     end
@@ -232,7 +232,7 @@ SacredShield:Callback(function(spell)
     end
 end)
 
-DivineFavor:Callback(function(spell)
+pve_divine_favor:Callback(function(spell)
     if not rotation.settings.usedivinefavor then
         return
     end
@@ -257,7 +257,7 @@ DivineFavor:Callback(function(spell)
     end
 end)
 
-HolyShock:Callback(function(spell)
+pve_holy_shock:Callback(function(spell)
     if not rotation.settings.useholyshock then
         return
     end
@@ -279,7 +279,7 @@ HolyShock:Callback(function(spell)
     end
 end)
 
-AvengingWrath:Callback(function(spell)
+pve_avenging_wrath:Callback(function(spell)
     if not rotation.settings.useavengingwrath then
         return
     end
@@ -303,7 +303,7 @@ end)
 
 local store_holy_light_setting = rotation.settings.holy_light_friend_hp
 
-HolyLight:Callback("friend", function(spell)
+pve_holy_light:Callback("friend", function(spell)
     if not rotation.settings.useholylight then
         return
     end
@@ -336,7 +336,7 @@ HolyLight:Callback("friend", function(spell)
     end
 end)
 
-HolyLight:Callback("tank", function(spell)
+pve_holy_light:Callback("tank", function(spell)
     if not rotation.settings.useholylight then return end
     local friend = awful.fullGroup.within(40).filter(filter).lowest
     if not friend then return end
@@ -371,7 +371,7 @@ HolyLight:Callback("incinerate_flesh", function(spell)
 end)
 
 
-JudgementOfLight:Callback(function(spell)
+pve_judgement_of_light:Callback(function(spell)
     local enemy = awful.enemies.within(40).filter(filter).lowest
 
     if not enemy then
@@ -389,7 +389,7 @@ JudgementOfLight:Callback(function(spell)
     end
 end)
 
-DivinePlea:Callback(function(spell)
+pve_divine_plea:Callback(function(spell)
     if not rotation.settings.usedivineplea then
         return
     end
@@ -402,7 +402,7 @@ DivinePlea:Callback(function(spell)
     end
 end)
 
-DivineIllumination:Callback(function(spell)
+pve_divine_illumination:Callback(function(spell)
     if not rotation.settings.usedivineillumination then
         return
     end
@@ -418,7 +418,7 @@ DivineIllumination:Callback(function(spell)
     end
 end)
 
-SealOfWisdom:Callback(function(spell)
+pve_seal_of_wisdom:Callback(function(spell)
     if not player.buff(20166) then
         if spell:Cast(player) then
             awful.alert(spell.name, spell.id)
