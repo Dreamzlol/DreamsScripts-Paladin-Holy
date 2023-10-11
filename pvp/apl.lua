@@ -49,5 +49,3 @@ function rotation.APL_PvP()
     holy.RighteousFury()
     holy.SealOfWisdom()
 end
-
-return rotation.APL_PvP

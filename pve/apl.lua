@@ -70,5 +70,3 @@ function rotation.APL_PvE()
     holy.pve_seal_of_wisdom()
     holy.pve_shield_of_righteousness()
 end
-
-return rotation.APL_PvE
