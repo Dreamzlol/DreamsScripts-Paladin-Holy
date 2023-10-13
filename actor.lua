@@ -10,7 +10,6 @@ end
 awful.print("|cffFFFFFFDreams{ |cff00B5FFScripts |cffFFFFFF} - Holy Loaded!")
 awful.print("|cffFFFFFFDreams{ |cff00B5FFScripts |cffFFFFFF} - Version: 2.0.1")
 
-
 holy:Init(function()
     if rotation.settings.mode ~= current_mode then
         current_mode = rotation.settings.mode
