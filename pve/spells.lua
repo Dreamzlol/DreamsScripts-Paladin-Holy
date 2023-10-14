@@ -2,6 +2,12 @@ local Unlocker, awful, rotation = ...
 local holy = rotation.paladin.holy
 local Spell = awful.Spell
 local player, target, focus = awful.player, awful.target, awful.focus
+local NewItem = awful.NewItem
+
+local getItemId = function(slot)
+    itemId = GetInventoryItemID("player", slot)
+    return itemId
+end
 
 awful.Populate({
     pve_lay_on_hands            = Spell(48788, { beneficial = true, IgnoreCasting = true }),
@@ -21,6 +27,11 @@ awful.Populate({
     pve_auto_attack             = Spell(6603),
     pve_avenging_wrath          = Spell(31884),
     pve_shield_of_righteousness = Spell(61411),
+
+    -- Items
+    pve_trinket_1         = NewItem(getItemId(13)),
+    pve_trinket_2         = NewItem(getItemId(14)),
+    pve_inventory_slot_10 = NewItem(getItemId(10)),
 }, holy, getfenv(1))
 
 local function isBoss(unit)
@@ -61,6 +72,47 @@ local function isTank(unit)
 
     return false
 end
+
+pve_inventory_slot_10:Update(function(item)
+    if not target or not target.exists then
+        return
+    end
+
+    if target.level == -1 or (target.level == 82 and player.buff("Luck of the Draw")) then
+        if item:Usable() then
+            if item:Use() then
+                awful.alert("Hyperspeed Accelerators", 54758)
+                return
+            end
+        end
+    end
+end)
+
+pve_trinket_1:Update(function(item)
+    if not target or not target.exists then
+        return
+    end
+
+    if target.level == -1 or (target.level == 82 and player.buff("Luck of the Draw")) then
+        if item:Usable() then
+            item:Use()
+            return
+        end
+    end
+end)
+
+pve_trinket_2:Update(function(item)
+    if not target or not target.exists then
+        return
+    end
+
+    if target.level == -1 or (target.level == 82 and player.buff("Luck of the Draw")) then
+        if item:Usable() then
+            item:Use()
+            return
+        end
+    end
+end)
 
 pve_auto_attack:Callback(function(spell)
     local enemy = awful.enemies.within(5).filter(filter).lowest

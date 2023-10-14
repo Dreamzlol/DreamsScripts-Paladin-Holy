@@ -2,38 +2,6 @@ local Unlocker, awful, rotation = ...
 local holy = rotation.paladin.holy
 local player, target = awful.player, awful.target
 
-local function engineering_gloves()
-    local UseInventoryItem = awful.unlock("UseInventoryItem")
-    local getItemCooldown = GetInventoryItemCooldown("player", 10)
-
-    if target and target.exists then
-        if target.level == -1 and getItemCooldown == 0 then
-            if UseInventoryItem(10) then
-                awful.alert("Hyperspeed Accelerators", 54758)
-                return
-            end
-        end
-    end
-end
-
-local function trinket()
-    local UseInventoryItem = awful.unlock("UseInventoryItem")
-    local getItemCooldown13 = GetInventoryItemCooldown("player", 13)
-    local getItemCooldown14 = GetInventoryItemCooldown("player", 14)
-
-    if target and target.exists then
-        if target.level == -1 then
-            if getItemCooldown13 == 0 then
-                UseInventoryItem(13)
-                return
-            elseif getItemCooldown14 == 0 then
-                UseInventoryItem(14)
-                return
-            end
-        end
-    end
-end
-
 function rotation.apl_pve()
     if player.mounted or
         player.dead or
@@ -62,8 +30,12 @@ function rotation.apl_pve()
     holy.pve_divine_plea()
     holy.pve_beacon_of_light()
     holy.pve_sacred_shield()
-    engineering_gloves()
-    trinket()
+
+    -- Items
+    holy.pve_inventory_slot_10()
+    holy.pve_trinket_1()
+    holy.pve_trinket_2()
+
     holy.pve_holy_light("incinerate_flesh")
     holy.pve_holy_light("friend")
     holy.pve_holy_light("tank")
