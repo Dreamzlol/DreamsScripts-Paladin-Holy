@@ -33,8 +33,8 @@ function rotation.apl_pve()
 
     -- Items
     holy.pve_inventory_slot_10()
-    holy.pve_trinket_1()
-    holy.pve_trinket_2()
+    holy.pve_inventory_slot_13()
+    holy.pve_inventory_slot_14()
 
     holy.pve_holy_light("incinerate_flesh")
     holy.pve_holy_light("friend")

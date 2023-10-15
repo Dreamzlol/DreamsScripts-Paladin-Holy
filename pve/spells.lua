@@ -29,9 +29,9 @@ awful.Populate({
     pve_shield_of_righteousness = Spell(61411),
 
     -- Items
-    pve_trinket_1         = NewItem(getItemId(13)),
-    pve_trinket_2         = NewItem(getItemId(14)),
     pve_inventory_slot_10 = NewItem(getItemId(10)),
+    pve_inventory_slot_13 = NewItem(getItemId(13)),
+    pve_inventory_slot_14 = NewItem(getItemId(14)),
 }, holy, getfenv(1))
 
 local function isBoss(unit)
@@ -77,37 +77,47 @@ pve_inventory_slot_10:Update(function(item)
     if not target or not target.exists then
         return
     end
-
-    if target.level == -1 or (target.level == 82 and player.buff("Luck of the Draw")) then
-        if item:Usable() then
-            if item:Use() then
-                awful.alert("Hyperspeed Accelerators", 54758)
-                return
-            end
-        end
-    end
-end)
-
-pve_trinket_1:Update(function(item)
-    if not target or not target.exists then
+    if player.moving then
         return
     end
 
-    if target.level == -1 or (target.level == 82 and player.buff("Luck of the Draw")) then
-        if item:Usable() then
+    local _, duration, enable = GetInventoryItemCooldown("player", 10)
+    if enable == 1 and duration == 0 then
+        if target.level == -1 or (target.level == 82 and player.buff("Luck of the Draw")) then
             item:Use()
             return
         end
     end
 end)
 
-pve_trinket_2:Update(function(item)
+pve_inventory_slot_13:Update(function(item)
     if not target or not target.exists then
         return
     end
+    if player.moving then
+        return
+    end
 
-    if target.level == -1 or (target.level == 82 and player.buff("Luck of the Draw")) then
-        if item:Usable() then
+    local _, duration, enable = GetInventoryItemCooldown("player", 13)
+    if enable == 1 and duration == 0 then
+        if target.level == -1 or (target.level == 82 and player.buff("Luck of the Draw")) then
+            item:Use()
+            return
+        end
+    end
+end)
+
+pve_inventory_slot_14:Update(function(item)
+    if not target or not target.exists then
+        return
+    end
+    if player.moving then
+        return
+    end
+
+    local _, duration, enable = GetInventoryItemCooldown("player", 14)
+    if enable == 1 and duration == 0 then
+        if target.level == -1 or (target.level == 82 and player.buff("Luck of the Draw")) then
             item:Use()
             return
         end
