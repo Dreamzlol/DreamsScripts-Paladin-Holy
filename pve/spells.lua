@@ -35,7 +35,9 @@ awful.Populate({
 }, holy, getfenv(1))
 
 local function isBoss(unit)
-    return unit.level == -1
+    if unit.level == -1 or (unit.level == 82 and player.buff("Luck of the Draw")) then
+        return true
+    end
 end
 
 local tankBuffs = {
