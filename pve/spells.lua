@@ -367,6 +367,9 @@ pve_holy_light:Callback("friend", function(spell)
     if not rotation.settings.useholylight then
         return
     end
+    if player.casting then
+        return
+    end
     local friend = awful.fullGroup.within(40).filter(filter).lowest
     if not friend then
         return
@@ -375,9 +378,6 @@ pve_holy_light:Callback("friend", function(spell)
         return
     end
     if player.moving then
-        return
-    end
-    if player.casting then
         return
     end
 
@@ -398,11 +398,11 @@ end)
 
 pve_holy_light:Callback("tank", function(spell)
     if not rotation.settings.useholylight then return end
+    if player.casting then return end
     local friend = awful.fullGroup.within(40).filter(filter).lowest
     if not friend then return end
     if not isTank(friend) then return end
     if player.moving then return end
-    if player.casting then return end
 
     if friend.hp < rotation.settings.holy_light_tank_hp then
         if spell:Cast(friend) then
@@ -413,10 +413,10 @@ pve_holy_light:Callback("tank", function(spell)
 end)
 
 pve_holy_light:Callback("incinerate_flesh", function(spell)
-    if player.moving then
+    if player.casting then
         return
     end
-    if player.casting then
+    if player.moving then
         return
     end
 
