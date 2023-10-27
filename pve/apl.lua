@@ -16,7 +16,7 @@ function rotation.apl_pve()
     if player.used("Divine Sacrifice", 10) then
         awful.call("RunMacroText", "/cancelaura Divine Sacrifice")
     end
-
+    holy.WasCastingCheck()
     holy.pve_lay_on_hands()
     holy.pve_divine_shield()
     holy.pve_avenging_wrath()

@@ -40,6 +40,19 @@ local function isBoss(unit)
     end
 end
 
+local wasCasting = {}
+function holy.WasCastingCheck()
+    local time = awful.time
+    if player.casting then
+        wasCasting[player.castingid] = time
+    end
+    for spell, when in pairs(wasCasting) do
+        if time - when > 0.100 + awful.buffer then
+            wasCasting[spell] = nil
+        end
+    end
+end
+
 local tankBuffs = {
     ["Flask of Stoneblood"] = true,
     ["Shield Wall"] = true,
@@ -367,9 +380,7 @@ pve_holy_light:Callback("friend", function(spell)
     if not rotation.settings.useholylight then
         return
     end
-    if player.casting then
-        return
-    end
+    if wasCasting[spell.id] then return end
     local friend = awful.fullGroup.within(40).filter(filter).lowest
     if not friend then
         return
@@ -398,7 +409,7 @@ end)
 
 pve_holy_light:Callback("tank", function(spell)
     if not rotation.settings.useholylight then return end
-    if player.casting then return end
+    if wasCasting[spell.id] then return end
     local friend = awful.fullGroup.within(40).filter(filter).lowest
     if not friend then return end
     if not isTank(friend) then return end
@@ -413,9 +424,7 @@ pve_holy_light:Callback("tank", function(spell)
 end)
 
 pve_holy_light:Callback("incinerate_flesh", function(spell)
-    if player.casting then
-        return
-    end
+    if wasCasting[spell.id] then return end
     if player.moving then
         return
     end
