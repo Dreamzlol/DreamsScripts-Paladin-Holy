@@ -6,6 +6,8 @@
         "pve/spells",
         "pvp/apl",
         "pvp/spells",
+        "leveling/apl",
+        "leveling/spells",
         "actor"
     ]
 }

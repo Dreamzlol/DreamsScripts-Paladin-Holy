@@ -23,4 +23,7 @@ holy:Init(function()
     if (rotation.settings.mode == "PvP") then
         rotation.apl_pvp()
     end
-end, 0.05)
+    if (rotation.settings.mode == "Leveling") then
+        rotation.aplLeveling()
+    end
+end)

@@ -1,0 +1,18 @@
+{
+    "Lua.diagnostics.globals": [
+        "CreateFrame",
+        "UnitClass",
+        "pairs",
+        "getfenv",
+        "GetInventoryItemID",
+        "GetInventoryItemCooldown",
+        "ipairs",
+        "unpack",
+        "LFDQueueFrame",
+        "LFDQueueFrameFindGroupButton",
+        "GetLFGMode",
+        "LE_LFG_CATEGORY_LFD",
+        "LFGDungeonReadyDialogEnterDungeonButton",
+        "LE_LFG_CATEGORY_LFR"
+    ]
+}

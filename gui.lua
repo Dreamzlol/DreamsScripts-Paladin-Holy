@@ -71,7 +71,7 @@ Welcome:Text({
     text = "|cffFF0099discord.gg/axWkr4sFMJ",
 })
 
-local Mode = gui:Tab(awful.textureEscape(53563, 16) .. " Rotation Mode")
+local Mode = gui:Tab(awful.textureEscape(53563, 16) .. "Rotation Mode")
 Mode:Text({
     text = "|cff00B5FFRotation Mode",
     header = true,
@@ -84,6 +84,7 @@ Mode:Dropdown({
     options = {
         { label = awful.textureEscape(20473, 16) .. " PvE", value = "PvE", tooltip = "Use PvE Rotation" },
         { label = awful.textureEscape(53551, 16) .. " PvP", value = "PvP", tooltip = "Use PvP Rotation" },
+        { label = awful.textureEscape(19750, 16) .. " Leveling", value = "Leveling", tooltip = "Use Leveling Rotation, good for Dungeon Finder Spamming. Use Flash of Light if you get oom too quickly using Holy Light" },
     },
     placeholder = "None",
     header = "Select Rotation Mode",
@@ -91,7 +92,7 @@ Mode:Dropdown({
 
 local Spells = gui:Tab(awful.textureEscape(48782, 16) .. "Spell Settings")
 Spells:Text({
-    text = "|cff00B5FFSpell Settings",
+    text = "|cff00B5FFSpell Settings (PvE / Leveling)",
     header = true,
     paddingBottom = 10,
 })
@@ -114,6 +115,26 @@ Spells:Slider({
     default = 95,
     valueType = "%",
     tooltip = "Use Holy Light if unit is Tank and has %HP or less"
+})
+
+Spells:Slider({
+    text = awful.textureEscape(19750) .. "  Flash of Light",
+    var = "flashOfLightFriendHp",
+    min = 0,
+    max = 100,
+    default = 95,
+    valueType = "%",
+    tooltip = "Use Flash of Light if unit has %HP or less"
+})
+
+Spells:Slider({
+    text = awful.textureEscape(19750) .. "  Flash of Light (Tank)",
+    var = "flashOfLightTankHp",
+    min = 0,
+    max = 100,
+    default = 95,
+    valueType = "%",
+    tooltip = "Use Flash of Light if unit is Tank and has %HP or less"
 })
 
 Spells:Slider({
@@ -206,28 +227,13 @@ Spells:Slider({
     tooltip = "Use Divine Illumination if unit has %MP or less"
 })
 
-local names = {}
-awful.fullGroup.loop(function(friend)
-    table.insert(names, friend.name)
-end)
-
-local options = {
-    { label = "None", value = "None" },
-}
-
-if names then
-    for i, name in ipairs(names) do
-        table.insert(options, { label = name, value = name })
-    end
-end
-
 Spells:Text({
     text = awful.textureEscape(53563) .. "Beacon of Light",
 })
 
 Spells:Text({
-    text =
-    "For now, because a bug in the Awful Framework, just set your Unit as Focus. Dropdown is coming back when the Awful Devs fixed it.",
+    text = "Set your Unit as Focus",
+    paddingBottom = 10,
 })
 
 Spells:Text({
@@ -235,13 +241,13 @@ Spells:Text({
 })
 
 Spells:Text({
-    text =
-    "For now, because a bug in the Awful Framework, just set your Unit as Focus. Dropdown is coming back when the Awful Devs fixed it.",
+    text = "Set your Unit as Focus",
+    paddingBottom = 10,
 })
 
 local Toggles = gui:Tab(awful.textureEscape(6064, 16) .. "Toggles")
 Toggles:Text({
-    text = "|cff00B5FFToggles",
+    text = "|cff00B5FFToggles (PvE / Leveling)",
     header = true,
     paddingBottom = 10,
 })
@@ -251,6 +257,13 @@ Toggles:Checkbox({
     var = "useholylight",
     tooltip = "Use Holy Light",
     default = true
+})
+
+Toggles:Checkbox({
+    text = "Use Flash of Light",
+    var = "useFlashOfLight",
+    tooltip = "Use Flash of Light",
+    default = false
 })
 
 Toggles:Checkbox({

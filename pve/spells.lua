@@ -72,7 +72,7 @@ end
 local StartAttack = awful.unlock("StartAttack")
 
 local function isTank(unit)
-    if unit.role == "Tank" or unit.aggro or unit.threat == 3 then
+    if unit.role == "tank" or unit.aggro or unit.threat == 3 then
         return true
     end
 
