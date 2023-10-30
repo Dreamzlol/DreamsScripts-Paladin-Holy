@@ -336,6 +336,13 @@ Toggles:Checkbox({
     default = true
 })
 
+Toggles:Checkbox({
+    text = "Use Dungeon Finder Bot",
+    var = "usedungeonbot",
+    tooltip = "Use Dungeon Finder Bot",
+    default = true
+})
+
 local Macros = gui:Tab(awful.textureEscape(1706, 16) .. "Macros")
 Macros:Text({
     text = "|cff00B5FFMacros",

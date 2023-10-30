@@ -67,6 +67,7 @@ local function isTank(unit)
 end
 
 awful.onTick(function()
+    if not rotation.settings.usedungeonbot then return end
     awful.fullGroup.loop(function(unit)
         if isTank(unit) then
             unit.setFocus()
@@ -89,7 +90,7 @@ end)
 
 local satchelOfHelpfulGoods = awful.Item(51999)
 awful.onTick(function()
-    if not rotation.settings.uselayonhands then return end
+    if not rotation.settings.usedungeonbot then return end
 
     local mode, subMode = GetLFGMode(LE_LFG_CATEGORY_LFD)
 
