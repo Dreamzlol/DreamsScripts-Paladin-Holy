@@ -16,6 +16,7 @@ function rotation.aplLeveling()
     if player.used("Divine Sacrifice", 10) then
         awful.call("RunMacroText", "/cancelaura Divine Sacrifice")
     end
+
     holy.WasCastingCheck()
     holy.leveling_lay_on_hands()
     holy.leveling_divine_shield()
